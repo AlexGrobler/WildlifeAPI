@@ -10,15 +10,33 @@ namespace WildlifeAPI.Controllers
 {
     public class WildlifeAPIController : ApiController
     {
-        [Route("api/WildlifeSightings/{speciesId}")]
-        public Sighting Get(string speciesId)
+        [Route("api/WildlifeSightings/BySpecies/{speciesId}")]
+        public IEnumerable<Sighting> GetSightingsBySpecies(int speciesId)
         {
-            //ensures that the instance of this db connection is disposed of in memory...
-            //immediately rather than waiting for GC.
             using (wildlife_sightings_DBEntities db = new wildlife_sightings_DBEntities())
             {
-                return db.Sightings.Find(speciesId);
+                return db.Sightings.Where(s => s.SpeciesID == speciesId).ToList();
             }
         }
+
+        [Route("api/WildlifeSightings/All")]
+        public IEnumerable<Sighting> GetAllSightings()
+        {
+            using (wildlife_sightings_DBEntities db = new wildlife_sightings_DBEntities())
+            {
+                return db.Sightings.ToList();
+            }
+        }
+
+        [Route("api/WildlifeSightings/BySighting/{id}")]
+        public Sighting Get(int id)
+        {
+            using (wildlife_sightings_DBEntities db = new wildlife_sightings_DBEntities())
+            {
+                return db.Sightings.Find(id);
+            }
+        }
+
+
     }
 }
