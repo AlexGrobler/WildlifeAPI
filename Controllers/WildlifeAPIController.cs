@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using WildlifeAPI.Models;
+using static System.Net.WebRequestMethods;
 
 namespace WildlifeAPI.Controllers
 {
@@ -54,35 +55,65 @@ namespace WildlifeAPI.Controllers
 
         [HttpPost]
         [Route("api/WildlifeSightings/CreateSighting")]
-        public IHttpActionResult CreateSighting(Sighting sighting) 
+        public IHttpActionResult CreateSighting(Sighting sighting)
         {
-            if (ModelState.IsValid)
+            using (var db = new wildlife_sightings_DBEntities())
             {
-                db.Sightings.Add(sighting);
-                db.SaveChanges();
-                return CreatedAtRoute("Default", new { id = sighting.ID }, sighting); //follows RESTFul API principles to return feedback to the client
+                if (ModelState.IsValid)
+                {
+                    db.Sightings.Add(sighting);
+                    db.SaveChanges();
+                    return CreatedAtRoute("Default", new { id = sighting.ID }, sighting); //follows RESTFul API principles to return feedback to the client
+                }
+                return BadRequest(ModelState);
             }
-            return BadRequest(ModelState);
         }
 
         [HttpPost]
         [Route("api/WildlifeSightings/UpdateSighting")]
         public IHttpActionResult UpdateSighting(Sighting sighting)
         {
-            if (ModelState.IsValid)
+            using (var db = new wildlife_sightings_DBEntities()) 
             {
-                var dbSighting = db.Sightings.FirstOrDefault(s => s.ID == sighting.ID);
-                if (dbSighting == null)
+                if (ModelState.IsValid)
                 {
-                    return NotFound();
-                }
+                    var dbSighting = db.Sightings.FirstOrDefault(s => s.ID == sighting.ID);
+                    if (dbSighting == null)
+                    {
+                        return NotFound();
+                    }
 
-                db.Entry(dbSighting).CurrentValues.SetValues(sighting);
-                db.SaveChanges();
-                return Ok(dbSighting); //follows RESTFul API principles to return feedback to the client
+                    db.Entry(dbSighting).CurrentValues.SetValues(sighting);
+                    db.SaveChanges();
+                    return Ok(dbSighting); //follows RESTFul API principles to return feedback to the client
+                }
+                return BadRequest(ModelState);
             }
-            return BadRequest(ModelState);
         }
 
+        [HttpDelete]
+        [Route("api/WildlifeSightings/DeleteSighting/{id}")]
+        public IHttpActionResult DeleteSighting(int id)
+        {
+            using (var db = new wildlife_sightings_DBEntities())
+            {
+                try
+                {
+                    var dbSighting = db.Sightings.Find(id);
+                    if (dbSighting == null)
+                    {
+                        return NotFound();
+                    }
+
+                    db.Sightings.Remove(dbSighting);
+                    db.SaveChanges();
+                    return Ok(dbSighting);
+                }
+                catch (Exception ex)
+                {
+                    return InternalServerError(ex);
+                }
+            }
+        }
     }
 }
