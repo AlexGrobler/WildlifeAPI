@@ -10,33 +10,79 @@ namespace WildlifeAPI.Controllers
 {
     public class WildlifeAPIController : ApiController
     {
+        private wildlife_sightings_DBEntities db = new wildlife_sightings_DBEntities(); 
+
+        [HttpGet]
         [Route("api/WildlifeSightings/BySpecies/{speciesId}")]
-        public IEnumerable<Sighting> GetSightingsBySpecies(int speciesId)
+        public IHttpActionResult GetSightingsBySpecies(int speciesId)
         {
             using (wildlife_sightings_DBEntities db = new wildlife_sightings_DBEntities())
             {
-                return db.Sightings.Where(s => s.SpeciesID == speciesId).ToList();
+                var sightings = db.Sightings.Where(s => s.SpeciesID == speciesId).ToList();
+                if (sightings != null)
+                {
+                    return Ok(sightings);  //follows RESTFul API principles to return feedback to the client
+                }
+                return NotFound();
             }
         }
 
+        [HttpGet]
         [Route("api/WildlifeSightings/All")]
-        public IEnumerable<Sighting> GetAllSightings()
+        public IHttpActionResult GetAllSightings()
         {
             using (wildlife_sightings_DBEntities db = new wildlife_sightings_DBEntities())
             {
-                return db.Sightings.ToList();
+                return Ok(db.Sightings.ToList());  //follows RESTFul API principles to return feedback to the client
             }
         }
 
+        [HttpGet]
         [Route("api/WildlifeSightings/BySighting/{id}")]
-        public Sighting Get(int id)
+        public IHttpActionResult Get(int id)
         {
             using (wildlife_sightings_DBEntities db = new wildlife_sightings_DBEntities())
             {
-                return db.Sightings.Find(id);
+                var sighting = db.Sightings.Find(id);
+                if (sighting != null)
+                {
+                    return Ok(sighting);  //follows RESTFul API principles to return feedback to the client
+                }
+                return NotFound();    
             }
         }
 
+        [HttpPost]
+        [Route("api/WildlifeSightings/CreateSighting")]
+        public IHttpActionResult CreateSighting(Sighting sighting) 
+        {
+            if (ModelState.IsValid)
+            {
+                db.Sightings.Add(sighting);
+                db.SaveChanges();
+                return CreatedAtRoute("Default", new { id = sighting.ID }, sighting); //follows RESTFul API principles to return feedback to the client
+            }
+            return BadRequest(ModelState);
+        }
+
+        [HttpPost]
+        [Route("api/WildlifeSightings/UpdateSighting")]
+        public IHttpActionResult UpdateSighting(Sighting sighting)
+        {
+            if (ModelState.IsValid)
+            {
+                var dbSighting = db.Sightings.FirstOrDefault(s => s.ID == sighting.ID);
+                if (dbSighting == null)
+                {
+                    return NotFound();
+                }
+
+                db.Entry(dbSighting).CurrentValues.SetValues(sighting);
+                db.SaveChanges();
+                return Ok(dbSighting); //follows RESTFul API principles to return feedback to the client
+            }
+            return BadRequest(ModelState);
+        }
 
     }
 }

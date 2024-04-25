@@ -11,9 +11,13 @@ namespace WildlifeAPI.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Sighting
     {
+/*        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]*/
         public int ID { get; set; }
         public int SpeciesID { get; set; }
         public decimal XCoordinate { get; set; }
