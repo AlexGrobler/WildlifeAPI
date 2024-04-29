@@ -15,7 +15,7 @@
           <Property Name="YCoordinate" Type="decimal" Precision="8" Scale="6" Nullable="false" />
           <Property Name="TimeStamp" Type="datetime" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
-          <Property Name="Locaton" Type="nvarchar" MaxLength="255" />
+          <Property Name="Location" Type="nvarchar" MaxLength="255" />
           <Property Name="County" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityContainer Name="wildlife_sightings_DBModelStoreContainer">
@@ -36,7 +36,7 @@
           <Property Name="YCoordinate" Type="Decimal" Precision="8" Scale="6" Nullable="false" />
           <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Locaton" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="County" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="wildlife_sightings_DBEntities" annotation:LazyLoadingEnabled="true">
@@ -57,7 +57,7 @@
                 <ScalarProperty Name="YCoordinate" ColumnName="YCoordinate" />
                 <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Locaton" ColumnName="Locaton" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
                 <ScalarProperty Name="County" ColumnName="County" />
               </MappingFragment>
             </EntityTypeMapping>

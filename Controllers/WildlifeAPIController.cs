@@ -11,8 +11,6 @@ namespace WildlifeAPI.Controllers
 {
     public class WildlifeAPIController : ApiController
     {
-        private wildlife_sightings_DBEntities db = new wildlife_sightings_DBEntities(); 
-
         [HttpGet]
         [Route("api/WildlifeSightings/BySpecies/{speciesId}")]
         public IHttpActionResult GetSightingsBySpecies(int speciesId)

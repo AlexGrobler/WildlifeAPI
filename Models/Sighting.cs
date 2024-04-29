@@ -24,7 +24,7 @@ namespace WildlifeAPI.Models
         public decimal YCoordinate { get; set; }
         public System.DateTime TimeStamp { get; set; }
         public string Description { get; set; }
-        public string Locaton { get; set; }
+        public string Location { get; set; }
         public string County { get; set; }
     }
 }
