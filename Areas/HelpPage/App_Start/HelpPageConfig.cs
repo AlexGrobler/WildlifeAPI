@@ -16,6 +16,7 @@ using System.Web.Http;
 using System.Web.Http.OData;
 #endif
 
+#pragma warning disable
 namespace WildlifeAPI.Areas.HelpPage
 {
     /// <summary>

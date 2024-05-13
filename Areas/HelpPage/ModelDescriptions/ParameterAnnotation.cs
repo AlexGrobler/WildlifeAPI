@@ -1,5 +1,5 @@
 using System;
-
+#pragma warning disable
 namespace WildlifeAPI.Areas.HelpPage.ModelDescriptions
 {
     public class ParameterAnnotation

@@ -1,6 +1,6 @@
 using System.Web.Http;
 using System.Web.Mvc;
-
+#pragma warning disable
 namespace WildlifeAPI.Areas.HelpPage
 {
     public class HelpPageAreaRegistration : AreaRegistration

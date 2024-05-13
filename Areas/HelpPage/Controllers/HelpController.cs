@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using WildlifeAPI.Areas.HelpPage.ModelDescriptions;
 using WildlifeAPI.Areas.HelpPage.Models;
 
+#pragma warning disable
 namespace WildlifeAPI.Areas.HelpPage.Controllers
 {
     /// <summary>

@@ -13,7 +13,7 @@ using System.Web.Http.Controllers;
 using System.Web.Http.Description;
 using WildlifeAPI.Areas.HelpPage.ModelDescriptions;
 using WildlifeAPI.Areas.HelpPage.Models;
-
+#pragma warning disable
 namespace WildlifeAPI.Areas.HelpPage
 {
     public static class HelpPageConfigurationExtensions

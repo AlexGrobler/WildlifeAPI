@@ -7,6 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+#pragma warning disable
 namespace WildlifeAPI.Models
 {
     using System;

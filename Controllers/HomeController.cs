@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+#pragma warning disable
 namespace WildlifeAPI.Controllers
 {
     public class HomeController : Controller

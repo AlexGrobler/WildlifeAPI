@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Swashbuckle.Swagger.Annotations;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -9,10 +10,16 @@ using System.Web.Http;
 using WildlifeAPI.Models;
 using static System.Net.WebRequestMethods;
 
+#pragma warning disable
 namespace WildlifeAPI.Controllers
 {
     public class WildlifeAPIController : ApiController
     {
+        /// <summary>
+        /// Retrieves a specific sighting by species id
+        /// </summary>
+        /// <param name="speciesId">The ID of the species to retrieve</param>
+        /// <returns>The requested sighting</returns>
         [HttpGet]
         [Route("api/WildlifeSightings/BySpecies/{speciesId}")]
         public async Task<IHttpActionResult> GetSightingsBySpecies(int speciesId)
@@ -28,16 +35,25 @@ namespace WildlifeAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Retrieves all sightings from the database
+        /// </summary>
+        /// <returns>Returns all sightings</returns>
         [HttpGet]
         [Route("api/WildlifeSightings/All")]
         public async Task<IHttpActionResult> GetAllSightings()
         {
             using (wildlife_sightings_DBEntities db = new wildlife_sightings_DBEntities())
             {
-                return Ok(await db.Sightings.ToListAsync());  //follows RESTFul API principles to return feedback to the client
+                return Ok(await db.Sightings.ToListAsync()); 
             }
         }
 
+        /// <summary>
+        /// Retrieves a specific sighting by sighting id
+        /// </summary>
+        /// <param name="id">The ID of the sighting to retrieve</param>
+        /// <returns>The requested sighting</returns>
         [HttpGet]
         [Route("api/WildlifeSightings/BySighting/{id}")]
         public async Task<IHttpActionResult> Get(int id)
@@ -47,12 +63,16 @@ namespace WildlifeAPI.Controllers
                 var sighting = await db.Sightings.FindAsync(id);
                 if (sighting != null)
                 {
-                    return Ok(sighting);  //follows RESTFul API principles to return feedback to the client
+                    return Ok(sighting); 
                 }
                 return NotFound();    
             }
         }
 
+        /// <summary>
+        /// Creates a new sighting
+        /// </summary>
+        /// <param name="sighting">The sightng to update</param>
         [HttpPost]
         [Route("api/WildlifeSightings/CreateSighting")]
         public async Task<IHttpActionResult> CreateSighting(Sighting sighting)
@@ -63,12 +83,16 @@ namespace WildlifeAPI.Controllers
                 {
                     db.Sightings.Add(sighting);
                     await db.SaveChangesAsync();
-                    return CreatedAtRoute("Default", new { id = sighting.ID }, sighting); //follows RESTFul API principles to return feedback to the client
+                    return CreatedAtRoute("Default", new { id = sighting.ID }, sighting); 
                 }
                 return BadRequest(ModelState);
             }
         }
 
+        /// <summary>
+        /// Updates an existing sighting
+        /// </summary>
+        /// <param name="sighting">The sightng to update</param>
         [HttpPost]
         [Route("api/WildlifeSightings/UpdateSighting")]
         public async Task<IHttpActionResult> UpdateSighting(Sighting sighting)
@@ -85,12 +109,16 @@ namespace WildlifeAPI.Controllers
 
                     db.Entry(dbSighting).CurrentValues.SetValues(sighting);
                     await db.SaveChangesAsync();
-                    return Ok(dbSighting); //follows RESTFul API principles to return feedback to the client
+                    return Ok(dbSighting); 
                 }
                 return BadRequest(ModelState);
             }
         }
 
+        /// <summary>
+        /// Deletes a sighting
+        /// </summary>
+        /// <param name="id">The ID of the species to delete</param>
         [HttpDelete]
         [Route("api/WildlifeSightings/DeleteSighting/{id}")]
         public async Task<IHttpActionResult> DeleteSighting(int id)

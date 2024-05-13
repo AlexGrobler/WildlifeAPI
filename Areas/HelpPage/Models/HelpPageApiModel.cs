@@ -4,6 +4,7 @@ using System.Net.Http.Headers;
 using System.Web.Http.Description;
 using WildlifeAPI.Areas.HelpPage.ModelDescriptions;
 
+#pragma warning disable
 namespace WildlifeAPI.Areas.HelpPage.Models
 {
     /// <summary>

@@ -10,7 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
-
+#pragma warning disable
 namespace WildlifeAPI.Areas.HelpPage.ModelDescriptions
 {
     /// <summary>

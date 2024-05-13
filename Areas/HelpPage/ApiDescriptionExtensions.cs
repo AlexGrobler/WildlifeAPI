@@ -2,7 +2,7 @@ using System;
 using System.Text;
 using System.Web;
 using System.Web.Http.Description;
-
+#pragma warning disable
 namespace WildlifeAPI.Areas.HelpPage
 {
     public static class ApiDescriptionExtensions

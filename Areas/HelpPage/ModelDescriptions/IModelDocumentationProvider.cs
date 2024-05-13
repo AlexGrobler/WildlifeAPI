@@ -1,6 +1,6 @@
 using System;
 using System.Reflection;
-
+#pragma warning disable
 namespace WildlifeAPI.Areas.HelpPage.ModelDescriptions
 {
     public interface IModelDocumentationProvider

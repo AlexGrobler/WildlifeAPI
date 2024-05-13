@@ -1,5 +1,6 @@
 namespace WildlifeAPI.Areas.HelpPage
 {
+#pragma warning disable
     /// <summary>
     /// Indicates whether the sample is used for request or response
     /// </summary>

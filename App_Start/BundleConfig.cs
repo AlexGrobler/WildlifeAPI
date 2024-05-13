@@ -1,6 +1,6 @@
 ﻿using System.Web;
 using System.Web.Optimization;
-
+#pragma warning disable
 namespace WildlifeAPI
 {
     public class BundleConfig

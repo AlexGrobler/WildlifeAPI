@@ -6,7 +6,7 @@ using System.Web.Http.Controllers;
 using System.Web.Http.Description;
 using System.Xml.XPath;
 using WildlifeAPI.Areas.HelpPage.ModelDescriptions;
-
+#pragma warning disable
 namespace WildlifeAPI.Areas.HelpPage
 {
     /// <summary>

@@ -1,5 +1,6 @@
 namespace WildlifeAPI.Areas.HelpPage.ModelDescriptions
 {
+#pragma warning disable
     public class EnumValueDescription
     {
         public string Documentation { get; set; }
